@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use GildedRose\AgedBrie;
 use GildedRose\GildedRose;
 use GildedRose\Item;
 use GildedRose\Sulfuras;
@@ -50,7 +51,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_increase_aged_brie_quality_when_pass_a_day(): void
     {
-        $item = new Item('Aged Brie', 6, 14);
+        $item = new AgedBrie('Aged Brie', 6, 14);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(15, $item->quality());
@@ -59,7 +60,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_increase_double_aged_brie_quality_when_pass_a_day_with_sell_in_expires(): void
     {
-        $item = new Item('Aged Brie', -2, 14);
+        $item = new AgedBrie('Aged Brie', -2, 14);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(16, $item->quality());
@@ -68,7 +69,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_not_increase_quality_over_fifty(): void
     {
-        $item = new Item('Aged Brie', -2, 50);
+        $item = new AgedBrie('Aged Brie', -2, 50);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(50, $item->quality());
