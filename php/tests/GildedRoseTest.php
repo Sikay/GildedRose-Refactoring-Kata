@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tests;
 
 use GildedRose\AgedBrie;
+use GildedRose\BackstagePasses;
 use GildedRose\GildedRose;
 use GildedRose\Item;
 use GildedRose\Sulfuras;
@@ -96,7 +97,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_increase_backstage_passes_quality_when_pass_a_day_with_sell_in_over_ten(): void
     {
-        $item = new Item('Backstage passes to a TAFKAL80ETC concert', 11, 10);
+        $item = new BackstagePasses('Backstage passes to a TAFKAL80ETC concert', 11, 10);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(11, $item->quality());
@@ -105,7 +106,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_increase_double_backstage_passes_quality_when_pass_a_day_with_sell_in_under_ten(): void
     {
-        $item = new Item('Backstage passes to a TAFKAL80ETC concert', 10, 17);
+        $item = new BackstagePasses('Backstage passes to a TAFKAL80ETC concert', 10, 17);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(19, $item->quality());
@@ -114,7 +115,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_increase_triple_backstage_passes_quality_when_pass_a_day_with_sell_in_under_five(): void
     {
-        $item = new Item('Backstage passes to a TAFKAL80ETC concert', 5, 25);
+        $item = new BackstagePasses('Backstage passes to a TAFKAL80ETC concert', 5, 25);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(28, $item->quality());
@@ -123,7 +124,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_decrease_backstage_passes_quality_to_zero_when_pass_a_day_with_sell_in_expires(): void
     {
-        $item = new Item('Backstage passes to a TAFKAL80ETC concert', 0, 20);
+        $item = new BackstagePasses('Backstage passes to a TAFKAL80ETC concert', 0, 20);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(0, $item->quality());
