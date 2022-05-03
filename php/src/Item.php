@@ -7,6 +7,7 @@ namespace GildedRose;
 final class Item
 {
     private const MIN_QUALITY = 0;
+    private const MAX_QUALITY = 50;
 
     public string $name;
     public int $sell_in;
@@ -43,7 +44,9 @@ final class Item
 
     public function increaseQuality(): void
     {
-        $this->quality = $this->quality + 1;
+        if ($this->quality < self::MAX_QUALITY) {
+            $this->quality = $this->quality + 1;
+        }
     }
 
     public function decreaseSellIn(): void

@@ -13,8 +13,6 @@ final class GildedRose
     private const BACKSTAGE_PASSES_TEN_DAYS_TREATMENT = 10;
     private const BACKSTAGE_PASSES_FIVE_DAYS_TREATMENT = 5;
 
-    private const MAX_QUALITY = 50;
-
     private const SELL_IN_EXPIRES = 0;
 
     private array $items;
@@ -30,19 +28,13 @@ final class GildedRose
             if ($item->name != self::AGED_BRIE && $item->name != self::BACKSTAGE_PASSES && $item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
                 $item->decreaseQuality();
             } else {
-                if ($item->quality < self::MAX_QUALITY) {
-                    $item->increaseQuality();
-                    if ($item->name == self::BACKSTAGE_PASSES) {
-                        if ($item->sell_in <= self::BACKSTAGE_PASSES_TEN_DAYS_TREATMENT) {
-                            if ($item->quality < self::MAX_QUALITY) {
-                                $item->increaseQuality();
-                            }
-                        }
-                        if ($item->sell_in <= self::BACKSTAGE_PASSES_FIVE_DAYS_TREATMENT) {
-                            if ($item->quality < self::MAX_QUALITY) {
-                                $item->increaseQuality();
-                            }
-                        }
+                $item->increaseQuality();
+                if ($item->name == self::BACKSTAGE_PASSES) {
+                    if ($item->sell_in <= self::BACKSTAGE_PASSES_TEN_DAYS_TREATMENT) {
+                        $item->increaseQuality();
+                    }
+                    if ($item->sell_in <= self::BACKSTAGE_PASSES_FIVE_DAYS_TREATMENT) {
+                        $item->increaseQuality();
                     }
                 }
             }
@@ -59,9 +51,7 @@ final class GildedRose
                         $item->quality = $item->quality - $item->quality;
                     }
                 } else {
-                    if ($item->quality < self::MAX_QUALITY) {
-                        $item->increaseQuality();
-                    }
+                    $item->increaseQuality();
                 }
             }
         }
