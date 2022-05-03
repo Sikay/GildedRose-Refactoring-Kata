@@ -8,4 +8,9 @@ class Sulfuras extends Item
     {
         parent::__construct($name, $sell_in, $quality);
     }
+
+    public function update()
+    {
+        // TODO: Implement update() method.
+    }
 }

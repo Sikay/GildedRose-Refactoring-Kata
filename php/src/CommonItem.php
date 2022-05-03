@@ -8,4 +8,13 @@ class CommonItem extends Item
     {
         parent::__construct($name, $sell_in, $quality);
     }
+
+    public function update()
+    {
+        $this->decreaseQuality();
+        $this->decreaseSellIn();
+        if ($this->sell_in < self::SELL_IN_EXPIRES) {
+            $this->decreaseQuality();
+        }
+    }
 }

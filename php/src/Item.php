@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace GildedRose;
 
-class Item
+abstract class Item
 {
     private const MIN_QUALITY = 0;
     private const MAX_QUALITY = 50;
+
+    protected const SELL_IN_EXPIRES = 0;
 
     public string $name;
     public int $sell_in;
@@ -19,6 +21,8 @@ class Item
         $this->sell_in = $sell_in;
         $this->quality = $quality;
     }
+
+    abstract function update();
 
     public function name(): string
     {
