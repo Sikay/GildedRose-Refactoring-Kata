@@ -28,25 +28,21 @@ final class GildedRose
 
             switch ($item->name) {
                 case self::AGED_BRIE:
-                    $item->decreaseSellIn();
                     $item->increaseQuality();
-
+                    $item->decreaseSellIn();
                     if ($item->sell_in < self::SELL_IN_EXPIRES) {
                         $item->increaseQuality();
                     }
                     break;
                 case self::BACKSTAGE_PASSES:
-                    $item->decreaseSellIn();
                     $item->increaseQuality();
-
                     if ($item->sell_in <= self::BACKSTAGE_PASSES_TEN_DAYS_TREATMENT) {
                         $item->increaseQuality();
                     }
-
                     if ($item->sell_in <= self::BACKSTAGE_PASSES_FIVE_DAYS_TREATMENT) {
                         $item->increaseQuality();
                     }
-
+                    $item->decreaseSellIn();
                     if ($item->sell_in < self::SELL_IN_EXPIRES) {
                         $item->quality = $item->quality - $item->quality;
                     }
@@ -54,9 +50,8 @@ final class GildedRose
                 case self::SULFURAS_HAND_OF_RAGNAROS:
                     break;
                 default:
-                    $item->decreaseSellIn();
                     $item->decreaseQuality();
-
+                    $item->decreaseSellIn();
                     if ($item->sell_in < self::SELL_IN_EXPIRES) {
                         $item->decreaseQuality();
                     }
