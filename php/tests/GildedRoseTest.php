@@ -6,6 +6,7 @@ namespace Tests;
 
 use GildedRose\GildedRose;
 use GildedRose\Item;
+use GildedRose\Sulfuras;
 use PHPUnit\Framework\TestCase;
 
 class GildedRoseTest extends TestCase
@@ -76,7 +77,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_not_change_quality_for_legendary_item(): void
     {
-        $item = new Item('Sulfuras, Hand of Ragnaros', 0, 80);
+        $item = new Sulfuras('Sulfuras, Hand of Ragnaros', 0, 80);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(80, $item->quality());
@@ -85,7 +86,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_not_change_sell_in_for_legendary_item(): void
     {
-        $item = new Item('Sulfuras, Hand of Ragnaros', 0, 80);
+        $item = new Sulfuras('Sulfuras, Hand of Ragnaros', 0, 80);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(0, $item->sellIn());

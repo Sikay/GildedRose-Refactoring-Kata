@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GildedRose;
 
-final class Item
+class Item
 {
     private const MIN_QUALITY = 0;
     private const MAX_QUALITY = 50;
