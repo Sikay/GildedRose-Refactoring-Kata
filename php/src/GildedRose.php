@@ -25,34 +25,41 @@ final class GildedRose
     public function updateQuality(): void
     {
         foreach ($this->items as $item) {
-            if ($item->name != self::AGED_BRIE && $item->name != self::BACKSTAGE_PASSES && $item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
-                $item->decreaseQuality();
-            } else {
-                $item->increaseQuality();
-                if ($item->name == self::BACKSTAGE_PASSES) {
+
+            switch ($item->name) {
+                case self::AGED_BRIE:
+                    $item->decreaseSellIn();
+                    $item->increaseQuality();
+
+                    if ($item->sell_in < self::SELL_IN_EXPIRES) {
+                        $item->increaseQuality();
+                    }
+                    break;
+                case self::BACKSTAGE_PASSES:
+                    $item->decreaseSellIn();
+                    $item->increaseQuality();
+
                     if ($item->sell_in <= self::BACKSTAGE_PASSES_TEN_DAYS_TREATMENT) {
                         $item->increaseQuality();
                     }
+
                     if ($item->sell_in <= self::BACKSTAGE_PASSES_FIVE_DAYS_TREATMENT) {
                         $item->increaseQuality();
                     }
-                }
-            }
 
-            if ($item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
-                $item->decreaseSellIn();
-            }
-
-            if ($item->sell_in < self::SELL_IN_EXPIRES) {
-                if ($item->name != self::AGED_BRIE && $item->name != self::BACKSTAGE_PASSES && $item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
+                    if ($item->sell_in < self::SELL_IN_EXPIRES) {
+                        $item->quality = $item->quality - $item->quality;
+                    }
+                    break;
+                case self::SULFURAS_HAND_OF_RAGNAROS:
+                    break;
+                default:
+                    $item->decreaseSellIn();
                     $item->decreaseQuality();
-                } else {
-                    $item->increaseQuality();
-                }
 
-                if ($item->name === self::BACKSTAGE_PASSES) {
-                    $item->quality = $item->quality - $item->quality;
-                }
+                    if ($item->sell_in < self::SELL_IN_EXPIRES) {
+                        $item->decreaseQuality();
+                    }
             }
         }
     }
