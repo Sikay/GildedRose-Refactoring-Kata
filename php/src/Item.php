@@ -6,6 +6,7 @@ namespace GildedRose;
 
 final class Item
 {
+    private const MIN_QUALITY = 0;
 
     public string $name;
     public int $sell_in;
@@ -31,6 +32,23 @@ final class Item
     public function quality(): int
     {
         return $this->quality;
+    }
+
+    public function decreaseQuality(): void
+    {
+        if ($this->quality > self::MIN_QUALITY) {
+            $this->quality = $this->quality - 1;
+        }
+    }
+
+    public function increaseQuality(): void
+    {
+        $this->quality = $this->quality + 1;
+    }
+
+    public function decreaseSellIn(): void
+    {
+        $this->sell_in = $this->sell_in - 1;
     }
 
     public function __toString(): string

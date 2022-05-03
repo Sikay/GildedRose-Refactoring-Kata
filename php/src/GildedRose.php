@@ -13,7 +13,6 @@ final class GildedRose
     private const BACKSTAGE_PASSES_TEN_DAYS_TREATMENT = 10;
     private const BACKSTAGE_PASSES_FIVE_DAYS_TREATMENT = 5;
 
-    private const MIN_QUALITY = 0;
     private const MAX_QUALITY = 50;
 
     private const SELL_IN_EXPIRES = 0;
@@ -28,24 +27,20 @@ final class GildedRose
     public function updateQuality(): void
     {
         foreach ($this->items as $item) {
-            if ($item->name != self::AGED_BRIE and $item->name != self::BACKSTAGE_PASSES) {
-                if ($item->quality > self::MIN_QUALITY) {
-                    if ($item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
-                        $this->decreaseQuality($item);
-                    }
-                }
+            if ($item->name != self::AGED_BRIE && $item->name != self::BACKSTAGE_PASSES && $item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
+                $item->decreaseQuality();
             } else {
                 if ($item->quality < self::MAX_QUALITY) {
-                    $this->increaseQuality($item);
+                    $item->increaseQuality();
                     if ($item->name == self::BACKSTAGE_PASSES) {
                         if ($item->sell_in <= self::BACKSTAGE_PASSES_TEN_DAYS_TREATMENT) {
                             if ($item->quality < self::MAX_QUALITY) {
-                                $this->increaseQuality($item);
+                                $item->increaseQuality();
                             }
                         }
                         if ($item->sell_in <= self::BACKSTAGE_PASSES_FIVE_DAYS_TREATMENT) {
                             if ($item->quality < self::MAX_QUALITY) {
-                                $this->increaseQuality($item);
+                                $item->increaseQuality();
                             }
                         }
                     }
@@ -53,41 +48,22 @@ final class GildedRose
             }
 
             if ($item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
-                $this->decreaseSellIn($item);
+                $item->decreaseSellIn();
             }
 
             if ($item->sell_in < self::SELL_IN_EXPIRES) {
-                if ($item->name != self::AGED_BRIE) {
+                if ($item->name != self::AGED_BRIE && $item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
                     if ($item->name != self::BACKSTAGE_PASSES) {
-                        if ($item->quality > self::MIN_QUALITY) {
-                            if ($item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
-                                $this->decreaseQuality($item);
-                            }
-                        }
+                        $item->decreaseQuality();
                     } else {
                         $item->quality = $item->quality - $item->quality;
                     }
                 } else {
                     if ($item->quality < self::MAX_QUALITY) {
-                        $this->increaseQuality($item);
+                        $item->increaseQuality();
                     }
                 }
             }
         }
-    }
-
-    private function decreaseQuality($item): void
-    {
-        $item->quality = $item->quality - 1;
-    }
-
-    private function increaseQuality($item): void
-    {
-        $item->quality = $item->quality + 1;
-    }
-
-    private function decreaseSellIn($item): void
-    {
-        $item->sell_in = $item->sell_in - 1;
     }
 }
