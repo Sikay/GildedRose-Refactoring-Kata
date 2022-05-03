@@ -44,14 +44,14 @@ final class GildedRose
             }
 
             if ($item->sell_in < self::SELL_IN_EXPIRES) {
-                if ($item->name != self::AGED_BRIE && $item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
-                    if ($item->name != self::BACKSTAGE_PASSES) {
-                        $item->decreaseQuality();
-                    } else {
-                        $item->quality = $item->quality - $item->quality;
-                    }
+                if ($item->name != self::AGED_BRIE && $item->name != self::BACKSTAGE_PASSES && $item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
+                    $item->decreaseQuality();
                 } else {
                     $item->increaseQuality();
+                }
+
+                if ($item->name === self::BACKSTAGE_PASSES) {
+                    $item->quality = $item->quality - $item->quality;
                 }
             }
         }
