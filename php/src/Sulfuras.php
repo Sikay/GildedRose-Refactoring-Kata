@@ -4,13 +4,13 @@ namespace GildedRose;
 
 class Sulfuras extends Item
 {
-    public function __construct(string $name, int $sell_in, int $quality)
+    public function __construct(string $name, int $sellIn, int $quality)
     {
-        parent::__construct($name, $sell_in, $quality);
+        parent::__construct($name, $sellIn, $quality);
     }
 
     public function update()
     {
-        // TODO: Implement update() method.
+        // Nothing to implement.
     }
 }

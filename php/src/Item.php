@@ -12,13 +12,13 @@ abstract class Item
     protected const SELL_IN_EXPIRES = 0;
 
     public string $name;
-    public int $sell_in;
+    public int $sellIn;
     public int $quality;
 
-    public function __construct(string $name, int $sell_in, int $quality)
+    public function __construct(string $name, int $sellIn, int $quality)
     {
         $this->name = $name;
-        $this->sell_in = $sell_in;
+        $this->sellIn = $sellIn;
         $this->quality = $quality;
     }
 
@@ -31,7 +31,7 @@ abstract class Item
 
     public function sellIn(): int
     {
-        return $this->sell_in;
+        return $this->sellIn;
     }
 
     public function quality(): int
@@ -39,27 +39,32 @@ abstract class Item
         return $this->quality;
     }
 
-    public function decreaseQuality(): void
+    protected function decreaseQuality(): void
     {
         if ($this->quality > self::MIN_QUALITY) {
             $this->quality = $this->quality - 1;
         }
     }
 
-    public function increaseQuality(): void
+    protected function increaseQuality(): void
     {
         if ($this->quality < self::MAX_QUALITY) {
             $this->quality = $this->quality + 1;
         }
     }
 
-    public function decreaseSellIn(): void
+    protected function resetQuality(): void
     {
-        $this->sell_in = $this->sell_in - 1;
+        $this->quality = $this->quality - $this->quality;
+    }
+
+    protected function decreaseSellIn(): void
+    {
+        $this->sellIn = $this->sellIn - 1;
     }
 
     public function __toString(): string
     {
-        return "{$this->name}, {$this->sell_in}, {$this->quality}";
+        return "{$this->name}, {$this->sellIn}, {$this->quality}";
     }
 }

@@ -4,16 +4,16 @@ namespace GildedRose;
 
 class CommonItem extends Item
 {
-    public function __construct(string $name, int $sell_in, int $quality)
+    public function __construct(string $name, int $sellIn, int $quality)
     {
-        parent::__construct($name, $sell_in, $quality);
+        parent::__construct($name, $sellIn, $quality);
     }
 
     public function update()
     {
         $this->decreaseQuality();
         $this->decreaseSellIn();
-        if ($this->sell_in < self::SELL_IN_EXPIRES) {
+        if ($this->sellIn < self::SELL_IN_EXPIRES) {
             $this->decreaseQuality();
         }
     }
