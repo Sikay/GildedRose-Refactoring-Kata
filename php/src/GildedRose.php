@@ -31,21 +31,21 @@ final class GildedRose
             if ($item->name != self::AGED_BRIE and $item->name != self::BACKSTAGE_PASSES) {
                 if ($item->quality > self::MIN_QUALITY) {
                     if ($item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
-                        $item->quality = $item->quality - 1;
+                        $this->decreaseQuality($item);
                     }
                 }
             } else {
                 if ($item->quality < self::MAX_QUALITY) {
-                    $item->quality = $item->quality + 1;
+                    $this->increaseQuality($item);
                     if ($item->name == self::BACKSTAGE_PASSES) {
                         if ($item->sell_in <= self::BACKSTAGE_PASSES_TEN_DAYS_TREATMENT) {
                             if ($item->quality < self::MAX_QUALITY) {
-                                $item->quality = $item->quality + 1;
+                                $this->increaseQuality($item);
                             }
                         }
                         if ($item->sell_in <= self::BACKSTAGE_PASSES_FIVE_DAYS_TREATMENT) {
                             if ($item->quality < self::MAX_QUALITY) {
-                                $item->quality = $item->quality + 1;
+                                $this->increaseQuality($item);
                             }
                         }
                     }
@@ -53,7 +53,7 @@ final class GildedRose
             }
 
             if ($item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
-                $item->sell_in = $item->sell_in - 1;
+                $this->decreaseSellIn($item);
             }
 
             if ($item->sell_in < self::SELL_IN_EXPIRES) {
@@ -61,7 +61,7 @@ final class GildedRose
                     if ($item->name != self::BACKSTAGE_PASSES) {
                         if ($item->quality > self::MIN_QUALITY) {
                             if ($item->name != self::SULFURAS_HAND_OF_RAGNAROS) {
-                                $item->quality = $item->quality - 1;
+                                $this->decreaseQuality($item);
                             }
                         }
                     } else {
@@ -69,10 +69,25 @@ final class GildedRose
                     }
                 } else {
                     if ($item->quality < self::MAX_QUALITY) {
-                        $item->quality = $item->quality + 1;
+                        $this->increaseQuality($item);
                     }
                 }
             }
         }
+    }
+
+    private function decreaseQuality($item): void
+    {
+        $item->quality = $item->quality - 1;
+    }
+
+    private function increaseQuality($item): void
+    {
+        $item->quality = $item->quality + 1;
+    }
+
+    private function decreaseSellIn($item): void
+    {
+        $item->sell_in = $item->sell_in - 1;
     }
 }
