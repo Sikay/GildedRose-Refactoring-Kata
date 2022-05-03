@@ -6,6 +6,7 @@ namespace Tests;
 
 use GildedRose\AgedBrie;
 use GildedRose\BackstagePasses;
+use GildedRose\CommonItem;
 use GildedRose\GildedRose;
 use GildedRose\Item;
 use GildedRose\Sulfuras;
@@ -16,7 +17,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_decrease_quality_when_pass_a_day(): void
     {
-        $item = new Item('+5 Dexterity Vest', 10, 20);
+        $item = new CommonItem('+5 Dexterity Vest', 10, 20);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(19, $item->quality());
@@ -25,7 +26,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_decrease_sell_in_when_pass_a_day(): void
     {
-        $item = new Item('+5 Dexterity Vest', 10, 20);
+        $item = new CommonItem('+5 Dexterity Vest', 10, 20);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(9, $item->sellIn());
@@ -34,7 +35,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_decrease_double_quality_when_pass_a_day_with_sell_in_expires(): void
     {
-        $item = new Item('+5 Dexterity Vest', 0, 20);
+        $item = new CommonItem('+5 Dexterity Vest', 0, 20);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(18, $item->quality());
@@ -43,7 +44,7 @@ class GildedRoseTest extends TestCase
     /** @test */
     public function should_not_decrease_quality_under_zero(): void
     {
-        $item = new Item('+5 Dexterity Vest', 10, 0);
+        $item = new CommonItem('+5 Dexterity Vest', 10, 0);
         $gildedRose = new GildedRose([$item]);
         $gildedRose->updateQuality();
         $this->assertSame(0, $item->quality());
