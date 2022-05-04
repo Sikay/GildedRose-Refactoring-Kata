@@ -9,7 +9,7 @@ class CommonItem extends Item
         parent::__construct($name, $sellIn, $quality);
     }
 
-    public function update()
+    public function update(): void
     {
         $this->decreaseQuality();
         $this->decreaseSellIn();

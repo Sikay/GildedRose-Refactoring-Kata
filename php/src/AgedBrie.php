@@ -9,7 +9,7 @@ class AgedBrie extends Item
         parent::__construct($name, $sellIn, $quality);
     }
 
-    public function update()
+    public function update(): void
     {
         $this->increaseQuality();
         $this->decreaseSellIn();
