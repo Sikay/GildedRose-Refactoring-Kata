@@ -11,9 +11,9 @@ class AgedBrie extends Item
 
     public function update(): void
     {
-        $this->increaseQuality();
         $this->decreaseSellIn();
-        if ($this->sellIn() < self::SELL_IN_EXPIRES) {
+        $this->increaseQuality();
+        if ($this->sellInIsLessThan(self::SELL_IN_EXPIRES)) {
             $this->increaseQuality();
         }
     }

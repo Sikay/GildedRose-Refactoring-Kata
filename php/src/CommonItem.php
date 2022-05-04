@@ -11,9 +11,9 @@ class CommonItem extends Item
 
     public function update(): void
     {
-        $this->decreaseQuality();
         $this->decreaseSellIn();
-        if ($this->sellIn() < self::SELL_IN_EXPIRES) {
+        $this->decreaseQuality();
+        if ($this->sellInIsLessThan(self::SELL_IN_EXPIRES)) {
             $this->decreaseQuality();
         }
     }

@@ -14,18 +14,18 @@ class BackstagePasses extends Item
 
     public function update(): void
     {
+        $this->decreaseSellIn();
         $this->increaseQuality();
 
-        if ($this->sellIn() <= self::BACKSTAGE_PASSES_TEN_DAYS_TREATMENT) {
-            $this->increaseQuality();
-        }
-        if ($this->sellIn() <= self::BACKSTAGE_PASSES_FIVE_DAYS_TREATMENT) {
+        if ($this->sellInIsLessThan(self::BACKSTAGE_PASSES_TEN_DAYS_TREATMENT)) {
             $this->increaseQuality();
         }
 
-        $this->decreaseSellIn();
+        if ($this->sellInIsLessThan(self::BACKSTAGE_PASSES_FIVE_DAYS_TREATMENT)) {
+            $this->increaseQuality();
+        }
 
-        if ($this->sellIn() < self::SELL_IN_EXPIRES) {
+        if ($this->sellInIsLessThan(self::SELL_IN_EXPIRES)) {
             $this->resetQuality();
         }
     }

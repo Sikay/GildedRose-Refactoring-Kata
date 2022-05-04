@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GildedRose;
 
+use phpDocumentor\Reflection\Types\Boolean;
+
 abstract class Item
 {
     protected const SELL_IN_EXPIRES = 0;
@@ -54,6 +56,11 @@ abstract class Item
     protected function decreaseSellIn(): void
     {
         $this->sellIn = $this->sellIn->decrease();
+    }
+
+    protected function sellInIsLessThan(int $days): bool
+    {
+        return $this->sellIn->isLessThan($days);
     }
 
     public function __toString(): string

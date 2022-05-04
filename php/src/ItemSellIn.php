@@ -2,6 +2,8 @@
 
 namespace GildedRose;
 
+use phpDocumentor\Reflection\Types\Boolean;
+
 class ItemSellIn
 {
     private int $sellIn;
@@ -19,5 +21,10 @@ class ItemSellIn
     public function decrease(): self
     {
         return new self($this->sellIn - 1);
+    }
+
+    public function isLessThan(int $days): bool
+    {
+        return $this->sellIn < $days;
     }
 }
