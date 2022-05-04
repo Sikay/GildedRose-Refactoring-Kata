@@ -4,7 +4,6 @@ namespace Tests;
 
 use ApprovalTests\Approvals;
 use GildedRose\GildedRose;
-use GildedRose\Item;
 use GildedRose\ItemFactory;
 use PHPStan\Testing\TestCase;
 

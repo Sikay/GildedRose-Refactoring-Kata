@@ -4,26 +4,22 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use GildedRose\AgedBrie;
-use GildedRose\BackstagePasses;
-use GildedRose\CommonItem;
 use GildedRose\GildedRose;
-use GildedRose\Item;
-use GildedRose\Sulfuras;
+use GildedRose\ItemFactory;
 
 echo 'OMGHAI!' . PHP_EOL;
 
 $items = [
-    new CommonItem('+5 Dexterity Vest', 10, 20),
-    new AgedBrie('Aged Brie', 2, 0),
-    new CommonItem('Elixir of the Mongoose', 5, 7),
-    new Sulfuras('Sulfuras, Hand of Ragnaros', 0, 80),
-    new Sulfuras('Sulfuras, Hand of Ragnaros', -1, 80),
-    new BackstagePasses('Backstage passes to a TAFKAL80ETC concert', 15, 20),
-    new BackstagePasses('Backstage passes to a TAFKAL80ETC concert', 10, 49),
-    new BackstagePasses('Backstage passes to a TAFKAL80ETC concert', 5, 49),
+    ItemFactory::createItem('+5 Dexterity Vest', 10, 20),
+    ItemFactory::createItem('Aged Brie', 2, 0),
+    ItemFactory::createItem('Elixir of the Mongoose', 5, 7),
+    ItemFactory::createItem('Sulfuras, Hand of Ragnaros', 0, 80),
+    ItemFactory::createItem('Sulfuras, Hand of Ragnaros', -1, 80),
+    ItemFactory::createItem('Backstage passes to a TAFKAL80ETC concert', 15, 20),
+    ItemFactory::createItem('Backstage passes to a TAFKAL80ETC concert', 10, 49),
+    ItemFactory::createItem('Backstage passes to a TAFKAL80ETC concert', 5, 49),
     // this conjured item does not work properly yet
-    new CommonItem('Conjured Mana Cake', 3, 6),
+    ItemFactory::createItem('Conjured Mana Cake', 3, 6),
 ];
 
 $app = new GildedRose($items);

@@ -8,7 +8,6 @@ use GildedRose\AgedBrie;
 use GildedRose\BackstagePasses;
 use GildedRose\CommonItem;
 use GildedRose\GildedRose;
-use GildedRose\Item;
 use GildedRose\Sulfuras;
 use PHPUnit\Framework\TestCase;
 
