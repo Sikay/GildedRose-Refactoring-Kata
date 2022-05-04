@@ -22,7 +22,7 @@ abstract class Item
         $this->quality = $quality;
     }
 
-    abstract function update();
+    abstract function update(): void;
 
     public function name(): string
     {
@@ -55,7 +55,7 @@ abstract class Item
 
     protected function resetQuality(): void
     {
-        $this->quality = $this->quality - $this->quality;
+        $this->quality -= $this->quality;
     }
 
     protected function decreaseSellIn(): void
