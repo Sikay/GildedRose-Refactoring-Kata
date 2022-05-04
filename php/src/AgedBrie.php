@@ -4,7 +4,7 @@ namespace GildedRose;
 
 class AgedBrie extends Item
 {
-    public function __construct(string $name, int $sellIn, int $quality)
+    public function __construct(string $name, int $sellIn, ItemQuality $quality)
     {
         parent::__construct($name, $sellIn, $quality);
     }

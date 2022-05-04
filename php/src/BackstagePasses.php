@@ -7,7 +7,7 @@ class BackstagePasses extends Item
     private const BACKSTAGE_PASSES_TEN_DAYS_TREATMENT = 10;
     private const BACKSTAGE_PASSES_FIVE_DAYS_TREATMENT = 5;
 
-    public function __construct(string $name, int $sellIn, int $quality)
+    public function __construct(string $name, int $sellIn, ItemQuality $quality)
     {
         parent::__construct($name, $sellIn, $quality);
     }

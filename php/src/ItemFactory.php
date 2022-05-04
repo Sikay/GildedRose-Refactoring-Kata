@@ -10,18 +10,20 @@ final class ItemFactory
 
     public static function createItem(string $name, int $sellIn, int $quality): Item
     {
+        $itemQuality = new ItemQuality($quality);
+
         if ($name === self::AGED_BRIE) {
-            return new AgedBrie($name, $sellIn, $quality);
+            return new AgedBrie($name, $sellIn, $itemQuality);
         }
 
         if ($name === self::BACKSTAGE_PASSES) {
-            return new BackstagePasses($name, $sellIn, $quality);
+            return new BackstagePasses($name, $sellIn, $itemQuality);
         }
 
         if ($name === self::SULFURAS_HAND_OF_RAGNAROS) {
-            return new Sulfuras($name, $sellIn, $quality);
+            return new Sulfuras($name, $sellIn, $itemQuality);
         }
 
-        return new CommonItem($name, $sellIn, $quality);
+        return new CommonItem($name, $sellIn, $itemQuality);
     }
 }

@@ -6,16 +6,13 @@ namespace GildedRose;
 
 abstract class Item
 {
-    private const MIN_QUALITY = 0;
-    private const MAX_QUALITY = 50;
-
     protected const SELL_IN_EXPIRES = 0;
 
     public string $name;
     public int $sellIn;
-    public int $quality;
+    public ItemQuality $quality;
 
-    public function __construct(string $name, int $sellIn, int $quality)
+    public function __construct(string $name, int $sellIn, ItemQuality $quality)
     {
         $this->name = $name;
         $this->sellIn = $sellIn;
@@ -36,26 +33,22 @@ abstract class Item
 
     public function quality(): int
     {
-        return $this->quality;
+        return $this->quality->show();
     }
 
     protected function decreaseQuality(): void
     {
-        if ($this->quality > self::MIN_QUALITY) {
-            $this->quality = $this->quality - 1;
-        }
+        $this->quality = $this->quality->decrease();
     }
 
     protected function increaseQuality(): void
     {
-        if ($this->quality < self::MAX_QUALITY) {
-            $this->quality = $this->quality + 1;
-        }
+        $this->quality = $this->quality->increase();
     }
 
     protected function resetQuality(): void
     {
-        $this->quality -= $this->quality;
+        $this->quality = $this->quality->reset();
     }
 
     protected function decreaseSellIn(): void
@@ -65,6 +58,6 @@ abstract class Item
 
     public function __toString(): string
     {
-        return "{$this->name}, {$this->sellIn}, {$this->quality}";
+        return "{$this->name}, {$this->sellIn}, {$this->quality->show()}";
     }
 }
