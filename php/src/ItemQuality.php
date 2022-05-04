@@ -22,7 +22,7 @@ class ItemQuality
     public function decrease(): self
     {
         if ($this->quality > self::MIN_QUALITY) {
-            return new self($this->quality = $this->quality - 1);
+            return new self($this->quality - 1);
         }
 
         return $this;
@@ -31,7 +31,7 @@ class ItemQuality
     public function increase(): self
     {
         if ($this->quality < self::MAX_QUALITY) {
-            return new self($this->quality = $this->quality + 1);
+            return new self($this->quality + 1);
         }
 
         return $this;
@@ -39,6 +39,6 @@ class ItemQuality
 
     public function reset(): self
     {
-        return new self($this->quality -= $this->quality);
+        return new self($this->quality - $this->quality);
     }
 }

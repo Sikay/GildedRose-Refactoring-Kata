@@ -9,10 +9,10 @@ abstract class Item
     protected const SELL_IN_EXPIRES = 0;
 
     public string $name;
-    public int $sellIn;
+    public ItemSellIn $sellIn;
     public ItemQuality $quality;
 
-    public function __construct(string $name, int $sellIn, ItemQuality $quality)
+    public function __construct(string $name, ItemSellIn $sellIn, ItemQuality $quality)
     {
         $this->name = $name;
         $this->sellIn = $sellIn;
@@ -28,7 +28,7 @@ abstract class Item
 
     public function sellIn(): int
     {
-        return $this->sellIn;
+        return $this->sellIn->show();
     }
 
     public function quality(): int
@@ -53,11 +53,11 @@ abstract class Item
 
     protected function decreaseSellIn(): void
     {
-        $this->sellIn = $this->sellIn - 1;
+        $this->sellIn = $this->sellIn->decrease();
     }
 
     public function __toString(): string
     {
-        return "{$this->name}, {$this->sellIn}, {$this->quality->show()}";
+        return "{$this->name}, {$this->sellIn->show()}, {$this->quality->show()}";
     }
 }
